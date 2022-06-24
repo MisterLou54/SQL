@@ -1,0 +1,17 @@
+CREATE TABLE my_store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, color TEXT, size INTEGER, price INTEGER, statistic TEXT);
+
+INSERT INTO my_store VALUES (1, "Schwin", 5, "red", 20, 400, "childrens");
+INSERT INTO my_store VALUES (2, "Schwin", 5, "blue", 24, 500, "teens");
+INSERT INTO my_store VALUES (3, "Bali", 5, "green", 26, 1000, "adults");
+INSERT INTO my_store VALUES (4, "Racer", 4, "silver", 28, 5000, "novice racer");
+INSERT INTO my_store VALUES (5, "Super Speed", 4, "graphite", 30, 9000, "advanced racer");
+
+SELECT * FROM my_store;
+SELECT SUM (quantity) FROM my_store WHERE price > 500;
+SELECT color, SUM (quantity) FROM my_store GROUP BY color;
+SELECT price, SUM (quantity) From my_store GROUP BY price;
+
+
+Comments: Check out my store database here. Notice how I've described each piece of code (first I created a store database, 
+then displayed the database Where you can observe bikes over 500$). Then i show the color inventory in the second query and on the third query i am 
+showing inventory again with price and quantity of each model.
