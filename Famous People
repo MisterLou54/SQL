@@ -1,0 +1,70 @@
+Project Famous People: Sec 1.4
+CREATE TABLE actors
+(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+full_name TEXT, 
+spouse TEXT, 
+city TEXT, 
+state TEXT);
+
+INSERT INTO actors (full_name, spouse, city, state) VALUES ("Brad Pitt", "Angelina Jolie", "New Orleans", "LA.");
+INSERT INTO actors (full_name, spouse, city, state) VALUES ("Angelina Jolie", "Brad Pitt", "Los Feliz", "CA.");
+INSERT INTO actors (full_name, spouse, city, state) VALUES ("Tommy Lee Jones", "Dawn Jones", "Terrel Hills", "TX.");
+INSERT INTO actors (full_name, spouse, city, state) VALUES ("Anthony Hopkins", "Stella Arroyave", "Malibu", "CA.");
+
+CREATE TABLE movies
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+person_id INTEGER,
+name TEXT);
+
+INSERT INTO movies (person_id, name) VALUES (1, "MR.& MRS.Smith");
+INSERT INTO movies (person_id, name) VALUES (1, "By the Sea");
+INSERT INTO movies (person_id, name) VALUES (1, "Meet Joe Black");
+INSERT INTO movies (person_id, name) VALUES (2, "MR.& MRS.Smith");
+INSERT INTO movies (person_id, name) VALUES (2, "By the Sea");
+INSERT INTO movies (person_id, name) VALUES (2, "Salt");
+INSERT INTO movies (person_id, name) VALUES (3, "US Marshals"); 
+INSERT INTO movies (person_id, name) VALUES (3, "The Fugitive");
+INSERT INTO movies (person_id, name) VALUES (3, "Men in Black");
+INSERT INTO movies (person_id, name) VALUES (4, "The Silence of the Lambs"); 
+INSERT INTO movies (person_id, name) VALUES (4, "Hannibal"); INSERT INTO movies (person_id, name) VALUES (4, "Meet Joe Black");
+
+CREATE table friends (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person1_id INTEGER,
+    person2_id INTEGER);
+
+INSERT INTO friends (person1_id, person2_id)
+    VALUES (1, 4);
+INSERT INTO friends (person1_id, person2_id)
+    VALUES (2, 3);
+    
+/* explicit join */
+SELECT actors.full_name, movies.name From actors
+    JOIN movies    
+    ON actors.id = movies.person_id;
+    
+    
+/* self join */
+SELECT a.full_name, b.full_name FROM friends
+    JOIN actors a 
+    ON friends.person1_id = a.id
+    Join actors b
+    ON friends.person2_id = b.id;
+
+SELECT full_name, spouse FROM actors;
+
+/* explicit join */
+SELECT actors.full_name, movies.name AS movie_title From actors
+    JOIN movies    
+    ON actors.id = movies.person_id
+    ORDER BY movies.name;
+    
+SELECT actors.full_name, movies.name AS movie_title From movies
+    JOIN actors 
+    ON movies.person_id = actors.id
+    Where movies.name = "Meet Joe Black";
+    
+SELECT actors.full_name, movies.name AS movie_title From movies
+    JOIN actors 
+    ON movies.person_id = actors.id
+    Where movies.name = "MR.& MRS.Smith";
