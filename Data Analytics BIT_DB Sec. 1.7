@@ -1,0 +1,84 @@
+/* 
+CREATED BY: Louis Castille
+CREATED ON: 6 August 2022
+DESCRIPTION: These Query's were produced as per the following questions 1 thru 7, from the Database Named BIT_DB.
+In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customers and order data. 
+*/
+
+/*Sec.1.7 (Question # 1) How Many orders were placed in January ? */
+SELECT
+    COUNT(orderID) 
+FROM 
+    JanSales;
+
+/*Sec.1.7 (Question # 2) How many of those orders were for an iPhone ? */
+SELECT 
+    COUNT(orderID)
+FROM 
+    JanSales   
+WHERE 
+    Product='iPhone';
+
+/*Sec.1.7 (Question # 3) Select the customer account numbers for all the orders that were placed in February.*/
+SELECT 
+    acctnum
+FROM 
+    customers cust
+INNER JOIN 
+    FebSales Feb
+ON 
+    cust.order_id = Feb.orderID;
+
+/*Sec.1.7 (Question # 4) Which product was the cheapest one sold in January, and what was the price ?*/
+SELECT DISTINCT 
+    Product,
+    price
+FROM 
+    JanSales 
+WHERE 
+    price 
+IN
+    (select 
+        MIN(price)
+    from 
+        JanSales);
+        
+/*Sec. 1.7 (Question # 5) What is the total revenue for each product sold in January ? 
+Revenue can be calculated using the number of products sold and the price of the products). */
+
+SELECT            
+    Product,
+    SUM(quantity)* price AS Revenue
+FROM
+    JanSales
+GROUP BY
+    Product;
+    
+/*Sec. 1.7 (Question # 6) Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue ?  */
+
+SELECT
+    SUM(Quantity) AS 'Amount Sold',
+    Product,
+    location,
+    SUM(quantity)*price AS 'Total Revenue'
+FROM
+    FebSales
+WHERE
+    location = '548 Lincoln St, Seattle, WA 98101'
+Group By
+    Product;
+    
+/*Sec. 1.7 (Question # 7) How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers ? */
+
+SELECT
+    COUNT(cust.acctnum)AS 'Number of Customers',
+    ROUND(AVG(quantity*price), 2) AS 'Avg Amount Spent' 
+FROM
+    FebSales Feb
+JOIN
+    customers cust
+ON
+    Feb.orderID = cust.order_id
+WHERE
+    Feb.Quantity >2;   
+
