@@ -1,0 +1,166 @@
+/* These Query's 1 thru 5 below are example query's for using different functions to help filter the data.
+Sec. 1.8 Part-2
+# 1*/
+SELECT
+    orderdate
+FROM
+    FebSales
+WHERE
+    orderdate
+BETWEEN '02/13/19 00:00' AND '02/18/19 00:00';
+
+/* # 2*/
+SELECT
+    location,
+    orderdate
+FROM
+    FebSales
+WHERE
+    orderdate = '02/18/19 01:35';
+    
+/* # 3*/
+SELECT
+    SUM(Quantity),
+    orderdate
+FROM
+    FebSales
+WHERE
+    orderdate
+LIKE
+    '02/18/19%'
+GROUP BY
+    orderdate;
+
+/*# 4 DISTINCT DOES NOT SHOW REDUNANT ROWS OF INFORMATION */    
+SELECT DISTINCT
+    Product
+FROM
+    FebSales
+WHERE
+    Product
+LIKE
+    '%Batteries%';
+    
+/*# 5 DISTINCT*/
+SELECT DISTINCT    
+    Product,
+    Price
+FROM
+    FebSales
+WHERE
+    Price
+LIKE
+    '%.99';
+
+/* Sec. 1.8 Part-2 (Question) List all the products sold in Los Angeles in February, and include how many of each were sold.*/
+
+SELECT
+    Product,
+    SUM(Quantity),
+    location
+FROM
+    FebSales
+WHERE
+    location
+LIKE
+    '%Los Angeles%'
+GROUP BY
+    Product;
+
+/*Sec. 1.9 Part-3 (Question #1) Which locations in New York recieved at least 3 orders in January, and how many orders did they each receive ? */
+
+SELECT DISTINCT
+    location,
+    COUNT(orderID)
+FROM
+    JanSales
+WHERE
+    location
+LIKE
+    '%New York%'
+GROUP BY
+    location
+HAVING
+    COUNT(orderID) >2;
+
+
+/*Sec. 1.9 Part-3 (Question #2) How many of each type of headphones were sold in February ?  */
+
+SELECT DISTINCT 
+    Product,
+    SUM(Quantity) AS Quantity
+FROM
+    FebSales
+WHERE
+    Product
+Like
+    '%headphones%'
+GROUP BY
+    Product;
+
+
+/*Sec. 1.9 Part-3 (Question #3) What was the average amount spent per account in February ? (Hint: For this question, 
+we want the average amount spent / number of accounts, not the amount spent by each account).*/
+
+SELECT              /*This query answers the first part of the question. (Per account) */
+    COUNT(acctnum),    
+    ROUND(Avg(Quantity*price), 2) AS 'AVG Price'
+FROM
+    FebSales Feb
+JOIN
+    customers cust
+ON
+    Feb.orderID = cust.order_id;
+
+
+SELECT                   /*This query answers the second part of the question, which seems to contradict the orginal question.(Over all Avg for all accounts) */
+    ROUND(SUM(Quantity*price), 2) AS 'AVG Price',
+    COUNT(cust.acctnum)
+FROM
+    FebSales Feb
+JOIN
+    customers cust
+ON
+    Feb.orderID = cust.order_id;
+
+
+/*Sec. 1.9 Part-3 (Question #4) What was the average quantity of products purchased per account in February ? 
+(Hint: just like question 3, we want the overall average, not the average for each account individually).*/
+
+SELECT               /*This query answers the first part of the question. (Per account) */
+    COUNT(acctnum),
+    ROUND(AVG(Quantity), 2) AS 'AVG Quantity'
+FROM
+    FebSales Feb
+JOIN
+    customers cust
+ON
+    Feb.orderID = cust.order_id;
+
+
+SELECT                      /*This query answers the second part of the question. (Over all Avg for all accounts)   */
+    COUNT(acctnum),
+    ROUND(SUM(Quantity), 2) AS 'AVG Quantity'
+FROM
+    FebSales Feb
+JOIN
+    customers cust
+ON
+    Feb.orderID = cust.order_id;
+
+
+/*Sec. 1.9 Part-3 (Question #5) Which product brought in the most revenue in January and how much revenue did it bring in total ? */
+    
+SELECT
+    Product,
+    ROUND(SUM(price*Quantity), 2) AS 'Total Revenue',
+    SUM(Quantity),
+    price
+FROM
+    JanSales
+GROUP BY 
+    Product
+ORDER BY
+    SUM(Quantity*price) DESC
+LIMIT 10;
+
