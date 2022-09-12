@@ -1,0 +1,1481 @@
+/* Ch. # 4
+CREATED BY: <LOUIS CASTILLE>
+CREATED ON: <18 JULY 2022> 
+DESCRIPTION: <A concise description of your query, i.e., question #5> This query selects the Last name, first name, email, and phone number from the customers table. Using the AS function to change the names of the column names and using different brackets for two word names
+and no brackets needed for singular words FROM the customers table. Then ORDER BY last name.
+*/
+
+SELECT
+	LastName AS [Last Name],
+	FirstName AS 'First Name',
+	Email AS EMAIL,
+	Phone AS CELL
+FROM  
+	customers
+ORDER BY 
+	LastName;
+	
+/* Ch. # 4
+CREATED BY: Louis Castille
+CREATED ON: 18 JULY 2022
+DESRIPTION: This query selects the FirstName, LastName, and Email from the customers table, then order by FirstName ASC, LastName DESC and limits 10 rows.
+*/
+
+SELECT 
+	FirstName AS [First Name],
+	LastName AS [Last Name],
+	Email AS [EMAIL]
+FROM
+	customers
+ORDER BY
+	FirstName ASC,
+	LastName DESC
+LIMIT 10;
+	
+/* Ch. # 4
+CREATED BY: Louis Castille 
+CREATED ON: 19 July 2022
+DESCRIPTION: This query selects the firstname, lastname and postalcode from the customers table and orders by postal code to show the customers without postal codes in the table.
+*/
+
+SELECT 
+	FirstName,
+	LastName,
+	PostalCode
+FROM 
+		Customers
+ORDER BY
+	PostalCode;
+	
+/* Ch. # 5 Starts Here:
+CREATED BY: Louis Castille
+CREATED ON: 19-July-2022
+DESCRIPTION: This is an example query from the book ch. 5, using arithmetic operators on numeric data 
+*/
+	
+SELECT
+	Total AS [Original Amount],
+	Total + 10 AS [Addition Operator],
+	Total - 10 AS [Subtraction Operator],
+	Total / 10 AS [Division Operator],
+	Total * 10 AS [Multiplication Operator],
+	Total % 10 AS [Modulo Operator]
+FROM
+	invoices
+ORDER BY 
+	Total DESC;
+	
+	
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 19 July 2022
+DESCRIPTION: This query is an example from ch. 5. The question was to see how many customers purchased two $0.99 songs, we would look in the invoices table for the total amounts of $1.98. Instead, we can insert a WHERE clause between the FROM and ORDER BY clauses
+to search for only those totals that equal $1.98. In conjunction with the total, adding a few other feilds, such as invoice date and address, will help identify each invoice. Adding in all these clauses yields the following:
+NOTE: The WHERE clause always comes after the FROM but before the ORDER BY. In this example, the WHERE clause is added to return all invoices that are equal to 1.98. The = sign is referred to as a comparison operator.
+*/ 
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM 
+	invoices
+WHERE 
+	Total = 1.98
+ORDER BY 
+	InvoiceDate;
+
+
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query we were looking for all invoices that are greater than 1.98.  Using the WHERE clause for the total > than 1.98 and used the ORDER BY clause to sort the data by InvoiceDate
+*/
+ 	
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total > 1.98
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query returns all invoices that are greater than or equal to 1.98. Using the WHERE clause for the total >= 1.98 and ORDER BY clause to sort the data by InvoiceDate
+*/	
+	
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total >= 1.98
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query returns all invoices that are not equal to 1.98; Using the WHERE clause for the total < > 1.98 and ORDER BY clause to sort the data by InvoiceDate
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total <> 1.98
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query returns the range of invoices that fall between 1.98 and 5.00. Using, Total (BETWEEN 1.98 AND 5.00) inside of the Where Clause, then using the ORDER BY clause to sort by InvoiceDate.
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total BETWEEN 1.98 AND 5.00
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query returns only the invoice amounts that are exactly $1.98 or $3.96. Using the IN operator inside of the WHERE clause then the ORDER BY clause to sort the data by invoice date.
+Note: The IN operator is used to find a list of precise values. With the IN operator, we can add as many values, separated by commas, as we need. With the = Operator we can find only one value.
+*/
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total IN (1.98, 3.96)
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query lists all the invoices that are 13.86, 18.86, and 21.86. Using commas we can add as many as we need inside (parenthesis).
+*/
+	
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total IN (13.86, 18.86, 21.86)
+ORDER BY
+	InvoiceDate;
+	
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query the = operator returns one value type the city Tucson, the text value must be surrounded by single quotes, BillingCity = 'Tucson'
+*/ 
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity = 'Tucson'
+ORDER BY
+	Total;
+	
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 20 July 2022
+DESCRIPTION: This query we are searching for multiple cities using the IN operator inside of the WHERE clause. 
+NOTE: The BillingCity IN ('Tucson', 'Paris', 'London') uses single quotation marks and wrapped in (parenthesis), if this is not correct, you will recieve an error message.
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity IN ('Tucson', 'Paris', 'London')
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATE ON: 21 July 2022
+DESCRIPTION: This query uses the LIKE Operator to search with Wildcards. Wildcard characters (percent character in quotation marks) '%T%' will always be enclosed in single quotation marks. Without quotation marks, % is an arithematic operator known as modulo . 
+The query will search for any invoices that were billed in cities that start with T, using only one 'T%' percent wildcard character. Results show that both Tronto and Tucson are now included. 
+NOTE: WHERE BillingCity LIKE 'T%' 
+1.) wildcard 'T%' results - finds all records beginning with T
+2.) wildcard '%T' results - finds all records ending in T
+3.) wildcard '%T%' results - finds all records that has T anywhere in the string of Text
+4.) wildcard 'T%T' results - finds all records beginning and ending in T
+*/
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity LIKE  'T%'
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 21 July 2022
+DESCRIPTION: This query uses the LIKE Operator to search with Wildcards. Wildcard characters (percent character in quotation marks) '%T%' will always be enclosed in single quotation marks. Without quotation marks, % is an arithematic operator known as modulo . 
+The query will search for any invoices whose billing city has a T anywhere in it. Using  '%T%' two (percent) wildcard characters.  
+NOTE: WHERE BillingCity LIKE '%T%' 
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity LIKE  '%T%'
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 21 July 2022
+DESCRIPTION:  In this query the LIKE operator can also be used to exclude results that match specified criteria. By placing the word NOT keyword in front of LIKE, you can exclude records from your query results.
+NOTE: BillingCity NOT LIKE '%T%'
+*/
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity NOT LIKE '%T%'
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATEED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This query returns results with a specific date using the = equal to Operator. Also, using a specific date function.
+NOTE: When querying for dates, its important to first take a look at how the date is stored in the table you are querying. To do this we visit the Browse Data tab and select the invoices table and observe the format in which the InvoiceDate column
+stores dates. Dates are stpred as yyyy-mm-dd 00:00:00. Next, go to the Database Structure tab and look at the InvoiceDate field of the invoices table. We can see in the Type column that field stores dates in a data type called DATETIME. When used
+in the WHERE clause, dates are surrounded by single quotes just as text is. When querying with dates, use the same operators used when querying with numbers: =, >, <, BETWEEN, ect.
+*/
+
+SELECT 
+	InvoiceDate, 
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	InvoiceDate = '2009-01-03 00:00:00'
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This query returns all invoices that were issued between January 1, 2009, and December 31, 2009.
+NOTE: The format in the WHERE Clause: WHERE InvoiceDate BETWEEN '2009-01-01 00:00:00' AND '2009-12-31 00:00:00'
+*/
+
+SELECT 
+	InvoiceDate, 
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices 
+WHERE
+	InvoiceDate BETWEEN '2009-01-01 00:00:00' AND '2009-12-31 00:00:00'
+ORDER BY
+	InvoiceDate;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This query finds the top 10 highest value invoices that occured after July 5, 2009.  
+NOTE: The format in the WHERE clause. WHERE InvoiceDate > '2009-07-05 00:00:00'. Then I ORDERED BY Total DESC, and LIMIT 10
+*/
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity, 
+	Total
+FROM
+	invoices
+WHERE
+	InvoiceDate > '2009-07-05 00:00:00'
+ORDER BY
+	Total DESC
+LIMIT 10;
+
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This example will show how to use the DATE ( ) to return the same results without entering the time stamp of '00:00:00' as part of the WHERE clause. Used when the time information is either blank or not relevant.
+*/
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	DATE(InvoiceDate) = '2009-01-03'
+ORDER BY 
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: The query uses the AND together with DATE function to find all invoices after 2010-01-02 with a total of less than $3.00. Using 2 fields in the WHERE Clause. Field (1) InvoiceDate, and Field (2) Total.
+NOTE: The WHERE Clause: DATE (InvoiceDate) > '2010-01-02' AND Total < 3. ORDER BY Total gives us the ability to use DESC to see the highest value.
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity, 
+	Total
+FROM
+	invoices
+WHERE
+	 DATE(InvoiceDate) > '2010-01-02' AND Total < 3
+ORDER BY
+	Total DESC;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This query finds all the invoices whose billing city starts with P and whose total is greater than $2.00. Using 2 fields in the Where Clause : 
+Field - (1) BillingCity, uses the LIKE Operator so we can use Wildcards 'P%' to return all cities that start with P. Remember the = sign only returns 1 value
+Field - (2) Total uses the AND Operator and the greater than character > to filter the Total field more than $2.00. 
+NOTE: The WHERE clause: BillingCity LIKE 'P%' AND Total >2
+*/
+
+SELECT
+	 InvoiceDate,
+	 BillingAddress,
+	 BillingCity,
+	 Total
+FROM
+	invoices
+WHERE
+	BillingCity LIKE 'P%' AND Total > 2
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: The OR Operator allows you to find the records that match any of the criteria you ask for. The query searches for all invoices whose BillingCity starts with P OR starts with D.
+NOTE: The WHERE clause: WHERE BillingCity LIke 'P%' OR BillingCity LIKE 'D%' 
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity, 
+	Total
+FROM
+	invoices
+WHERE
+	BillingCity LIKE 'P%' OR BillingCity LIKE 'D%'
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 22 July 2022
+DESCRIPTION: This query finds all the invoices over $1.98 from any cities whose names start with P or D. Using Parentheses with AND and OR to Specify the Order of Operations.
+NOTE: SQL Processes the AND operator like multiplication and the OR operator like addition, unless you include parentheses
+When parentheses are added as shown in the example below, the SQL browser first looks for all the records that satisfy the criteria between the parentheses: (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%'). Then, from within only these records, 
+it looks for records where the total is greater than $1.98 (Total > 1.98).
+PAY ATTENTION: To how the WHERE clause is written: WHERE Total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')
+ORDER BY
+	Total;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 23 July 2022
+DESCRIPTION: Operational Scenario. The sTunes sales team has a new sales goal. They want as many sTunes customers as possible to spend between seven and fifteen dollars when purchasing music from the sTunes online store. Thus, they have created the following 
+catergories: Baseline Purchase, Low Purchase, Target Purchase, and Top Performers. Since the cost of a song varies between $0.99 and $1.99, any invoice total in this range is considered a Baseline Purchase. Invoice totals between $2.00 and $6.99 are labeled Low Purchase.
+Since the target sales goal is between $7.00 and $15.00, any sales in this catergory are labeled Target Purchase. Any sales above $15.00 is seen as a Top Performer. Based on these catergories, the sTunes sales department wants to see if any information can be gleaned 
+from the database concerning the sales in all of the listed catergories.
+NOTE: This is where we create the CASE STATEMENT. To add our CASE statement to this query, we place it at the bottom of the SELECT portion of our query after all the exsisting feilds. We start by adding the keyword CASE, followed by the keyword END. Between these
+two keywords we start testing for conditions. Each test begins the keyword WHEN, followed by a logical test, which is simular to what you would add in a WHERE clause. Our first case to test is Baseline Purchases, which is any invoice under $2.00. In other words Total < 2.00.
+After the logical condition, we then specify what we want to happen if that condition is met. This is done with the THEN keyword. the label we disire for cases under $2.00 is 'Baseline Purchase' which is what is specified for our operational scenario. 
+This same sequence can be repeated for as many conditions as we want to test. So we repeat this process for the rest of the sales catergories mentioned in our operational scenario. The ELSE  keyword always follows the last explicit condition listed, Any records that 
+have yet to be catergorized will take their assignment from the catergory named in the ELSE clause. The last thing we do is create an alias that will become the name of the new field in our database. This alias will go after our END statement. 
+We will call our new field PurchaseType.
+Our CASE statement is written, so we can answer some pertinent questions, including the following:
+1.) What cities do our top-performers come from?
+2.)  Are our top-performing sales mainly from the United States or from other parts of the world?
+3.)  From what cities are the most baseline purchases made?
+We can modify the exsisting query with a WHERE clause in order to look at top-performers and order them by city.
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	BillingCountry,
+	Total,
+	CASE
+	WHEN TOTAL < 2.00 THEN 'Baseline Purchase'
+	WHEN TOTAL BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+	WHEN TOTAL BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+	Else 'Top Performers'
+	END AS PurchaseType
+FROM
+	invoices
+WHERE
+	Total < 2.00 AND PurchaseType = 'Baseline Purchase'
+ORDER BY
+	BillingCity;
+	
+/* Ch. # 5
+CREATED BY: Louis Castille
+CREATED ON: 23 July 2022
+DESCRIPTION: This query was created from the invoices table that includes a CASE statement that labels all sales from billing country USA as 'Domestic Sales' and all others sales as 'Foreign Sales'. Label your new field as SalesType after your END statement.
+2.) Order this data by the new field SalesType.
+3.) How many invoices from Domestic Sales were over $15?
+*/
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	BillingCountry,
+	Total,
+	CASE
+	WHEN BillingCountry = 'USA' THEN 'Domestic Sales'
+	ELSE 'Foreign Sales'
+	END AS SalesType
+FROM
+	invoices
+WHERE
+	SalesType = 'Domestic Sales' AND Total > 15.00
+ORDER BY
+	SalesType;
+
+
+/* Ch. # 6 Starts Here:
+CREATED BY: Louis Castille
+CREATED ON: 23 July 2022
+DESCRIPTION: This query uses a join to merge the invoices table with the customers table.
+*/
+
+SELECT
+	*
+FROM
+	invoices
+INNER JOIN
+	customers
+ON
+	invoices.CustomerId = customers.CustomerId;
+	
+	
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 24 July 2022
+DESCRIPTION: This query is an INNER JOIN - QUERY. In the SELECT statement, alias table names were used ( customers AS c AND invoices AS i ) to shorten the amount of typing. Then, in the FROM statement the alias table name is changed from invoices to i using 
+the AS keyword. Insided of the INNER JOIN the customers table name is given an alias name as well, using the AS keyword to change the table name from custormers to c, again to help shorten the amount of typing needed to build the query.
+NOTE: INNER JOINS will only return matching data from the 2 tables selected. The INNER JOIN is the most common type of join. The main use of an inner join is to bring corresponding data together from different tables in a relational database.
+*/
+
+SELECT
+	c.LastName,
+	c.FirstName,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.Total
+FROM
+	invoices AS i
+INNER JOIN
+	customers AS c
+ON 
+	i.CustomerId = c.CustomerId
+ORDER BY
+	c.LastName;
+	
+	
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 24 July 2022
+DESCRIPTION: This query is a LEFT OUTER JOIN. A LEFT OUTER JOIN combines all records from the left table (invoices) with any matching records from the right table (customers). The concept of a LEFT TABLE and a RIGHT TABLE depends entirely on the 
+order these tables are listed in the JOIN statement. Switching  list order will produce a different result set. 
+NOTE: LEFT OUTER JOINS are useful because they allow us to see discrepancies in our data. We can produce lists of customers that have not generated invoices or search for data that has been removed in the right table but still exsists in the left table.
+*/
+
+SELECT 
+	c.LastName,
+	c.FirstName,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.Total
+FROM
+	invoices AS i
+LEFT OUTER JOIN
+	customers AS c
+ON
+	i.CustomerId = c.CustomerId 
+ORDER BY
+	c.LastName;
+	
+	
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 24 July 2022
+DESCRIPTION: (INNER JOIN) - Now that we understand how we can relate the invoices, customers and employees tables, we need to come up with the "WHY".  Let's say the sTunes customer service department wants to reward the employees that are responsible for the ten
+highest individual sales. Customer sevice wants to create a plaque for each employee with a list of the customers they have helped. Now that we have an operational scenario, we can look at the ERD (Entity Relationship Diagram, Also called a Schema) to determine 
+which fields we need in our query. Sometimes, when writing complex queries accessing multiple tables, it helps to think through what fields we need and what tables those fields come from. Now that we have an idea what fields we want to display, we can begin 
+composing the query. We will start with invoices in our FROM clause. We will then write two INNER JOIN clauses sequentially: one that joins invoices to customers and another that joins both invoices and customers to the employees. We will order the entire 
+query by invoice total (in descending order to see the highest totals first), and limit to 10. 
+NOTE: Consult the entity relationship diagram and choose another table  to add to this query using another INNER JOIN. Choose which fields from this new table you wish to display and add them to the SELECT statement. This is where I added the invoice_items 
+table in the last INNER JOIN and then added the Quantity and UnitPrice in the SELECT statement.
+*/
+
+SELECT 
+	e.FirstName,
+	e.LastName,
+	e.EmployeeId,
+	c.FirstName,
+	c.LastName,
+	c.SupportRepId,
+	i.CustomerId,
+	i.Total,
+	i_i.Quantity,
+	i_i.UnitPrice
+FROM
+	Invoices AS i
+INNER JOIN
+	customers AS c
+ON
+	i.CustomerId = c.CustomerId 
+INNER JOIN
+	employees AS e
+ON
+	c.SupportRepId = e.EmployeeId
+INNER JOIN 
+	invoice_items AS i_i
+ON 
+	i.InvoiceId = i_i.InvoiceLineId
+ORDER BY 
+	i.Total DESC 
+LIMIT 10;
+
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 25 July 2022
+DESCRIPTION: Using LEFT OUTER JOINS with NULL, IS, and NOT. The LEFT OUTER JOIN shows us everything from our left table and all matching information from our right table. This ability is useful for analyzing our database and checking for incomplete information. 
+Let's say our sTunes company is conducting an internal audit on the way the company classifies albums versus single songs. sTunes management asks us to generate a list of all artists who do not have an album listed. Looking at our preceding entity relationship diagram, 
+we can surmise that the information we are focusing on is going to be stored in the artists and albums tables. Let's look at the relationship between those tables. 
+NOTE: Look at the tables for a one - to many relationship, where one = the primary key and the many = the foreign key in the second table. Using the arthists table with the primary key in the FROM statement (ie. One to the Many Relationship) , and the albums table with the 
+foreign key in the outer LEFT OUTER JOIN. To fully answer our initial inquiry and retrieve all the artists who do not have an album, we would need to add a WHERE clause that specified only the records that are null in the albums table. There are specific SQL keywords we 
+use to work with null values.
+1.) IS NULL in a WHERE clause would return only values that were null. 
+2.) NOT NULL would return only values that were not null. 
+Aliases where used in the select statement to help clarify the field names and from what table they came from.
+*/
+
+SELECT
+	ar.ArtistId AS [ArtistId From Artists Table],
+	al.ArtistId AS [ArtistId From Albums Table],
+	ar.Name AS [Artist Name],
+	al.Title AS [Album Title]
+FROM
+	artists AS ar
+LEFT OUTER JOIN
+	albums AS al
+ON
+	ar.ArtistId = al.ArtistId
+WHERE
+	al.ArtistId IS NULL;
+	
+	
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 25 July 2022
+DESCRIPTION: TURNING A RIGHT JOIN INTO A LEFT JOIN: Right joins are not supported in SQLite. Right joins are mirror images of LEFT JOINS. A right join takes all the records on the right side and joins them with all the corresponding records from the left. 
+If you simply switch the left and right tables, then you can use a left outer join to the very same effect. Using to LEFT OUTER JOIN  we simply swap the two table names in the join, , we can achieve the same result. So the only thing that differs is the order in which the 
+tables are listed
+*/
+
+SELECT
+	t.TrackId,
+	t.Composer,
+	t.Name,
+	al.AlbumId,
+	al.Title
+FROM
+	tracks AS t
+LEFT OUTER JOIN
+	albums AS al
+ON
+	t.AlbumId = al.AlbumId
+WHERE
+	t.Composer IS NULL; 
+
+
+/* Ch. # 6
+CREATED BY: Louis Castille
+CREATED ON: 25 July 2022
+DESCRIPTION: In this INNER JOIN Query, we are asked to Create an inner join between the albums and tracks tables and display the album names and the track names in a single result set. Then using the genres table, create a third inner join to this table 
+and include the Name field from that table in your result set. I added an additional Inner join from the artist table and then added the alias band name to help further see the results an shown below. 
+NOTE: IN order to build this type of complex query you should have an Entity Relationship Diagram (ERD). This is helpful when writing joins. This is a diagram of all the tables in the database schema drawn out and shows the primary keys for each table, and 
+the foreign key fields to show how each table is linked to another table in order to join them, also showing the (ONE - TO - MANY) relationships between them. This is going to be invaluable to writing joins and understanding the relationships better.
+*/
+
+
+SELECT 
+	t.Composer AS [artist name],
+	ar.Name AS [band name],
+	a.Title AS [album title],
+	t.Name AS [track name],
+	g.Name AS [genre name]
+FROM
+	albums AS a
+INNER JOIN
+	tracks AS t
+ON
+	a.AlbumId = t.AlbumId
+INNER JOIN
+	genres AS g
+ON
+	g.GenreId = t.GenreId
+INNER JOIN
+	artists AS ar
+ON
+	a.ArtistId = ar.ArtistId;
+	
+/* Ch. # 7 Starts Here:
+CREATED BY: Louis Castille     
+CREATED ON: 25 July 2022
+DESCRIPTION: This query uses the COUNT function to count the LastNames using an alias as NameCount from the customers table, then using a WHERE clause (LastName LIKE 'B%' ) with a LIKE function and a wildcard 'B%' to show only LastName starting with B.
+*/
+
+SELECT 
+	COUNT (LastName) AS [NameCount]
+FROM
+	customers
+WHERE
+	LastName LIKE 'B%';
+	
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 26 July 2022
+DESCRIPTION: In this query, We were asked to create a mailing list of our US customers. The address data is split up into parts (separate fields). Simply requesting the Address field is not enough. We would also need to select the City, State, and PostalCode fields. 
+The other issue is that all this data is in separate fields. If you want to create a simple mailing list, where each line represents the customer's full name and address, then the current layout is formatted very poorly for that. Fortunately, there are some great tools for 
+manipulating text strings so that we can get the output looking the way we want it. The first of these tools is called concatenation.
+*/
+
+SELECT 
+	FirstName,
+	LastName,
+	City,
+	State,
+	PostalCode
+FROM
+	customers
+WHERE
+	Country = 'USA';
+
+/*NOTE: Concatenating Strings of Text... Joining fields together is called concatenating them. To add two fields together we use a two-pipe || operator. For example, if we wanted to concatenate the fields FirstName and LastName, we could write the following:
+*/
+
+SELECT 
+	FirstName || LastName
+FROM
+	customers
+WHERE
+	CustomerID = 1;
+/*
+You can see from the output of our concatenation query that the || operator merely attached both fields together without spaces. To make this output a bit cleaner, we can use two concatenations in sequence and include a space in single quotation marks. After this 
+adjustment, our query looks like the following: I also added an alias of Full Name. 
+*/
+
+SELECT 
+	FirstName,
+	LastName,
+	FirstName || ' ' || LastName AS 'Full Name'
+FROM
+	customers
+WHERE
+	Country ='USA';
+	
+/* Ch. # 7
+Now that we have seen an example, we can use multiple concatenations to create a one - line name and address list for all our customers.  You do not have to use only spaces in between the double pipes. In the previous example, we used a comma and then a space ', ' to 
+get the desired format. You can add any text you wish as long as you put it inside the quotation marks. 
+I then copy and pasted the MailingAddress results from this query to Microsoft Word to see how the formatting came out.
+*/	
+SELECT
+	FirstName || ' ' || LastName || ' ' || Address || ', ' || City || ', ' || State || ' ' || PostalCode AS [MailingAddress]
+FROM
+	customers
+WHERE
+	Country = 'USA';
+
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 26 July 2022
+DESCRIPTION: This query uses the LENGHT function. When we use the LENGHT function on a field like PostalCode from our customers table, we can see that the lenght of each code is calculated. Simply put it counts each individual character from left to right.
+*/
+
+SELECT 
+	PostalCode,
+	LENGTH(PostalCode) AS [Postal Code Lenght]
+FROM
+	customers
+WHERE
+	Country = 'USA';
+
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 26 July 2022
+DESCRIPTION: This query uses the SUBSTR function. The SUBSTR function (X,Y,Z) is used to remove extra data in the First Query, and the Second Query the (X,Y) is used to split data apart.
+*/
+
+SELECT
+	PostalCode,
+	SUBSTR(PostalCode,1,5) AS [Five Digit Postal Code]      /*This SUBSTR uses the (X,Y,Z) function: where X=PostalCode, Y=1, and Z=5, This will return the first 5 characters for the PostalCode.*/
+FROM
+	customers
+WHERE
+	Country = 'USA';
+	
+SELECT
+	PostalCode,
+	SUBSTR(PostalCode,1,5) AS [Five Digit Postal Code],
+	SUBSTR(PostalCode,7) AS [ZIP+4 Code]  /* This SUBSTR uses the (X,Y) function: Where X=PostalCode and Y=7, This will return the 7th character to the last available character, Hence the field name (ZIP+4 Code)  */
+FROM
+	customers
+WHERE
+	Country = 'USA';
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 28 July 2022
+DESCRIPTION: In this query, we passed the entire FirstName field into the UPPER ( ) and LOWER ( ) functions as an argument, and then used an alias to label the result. We also created a "Full Name" alias to show that you can concatenate two fields after 
+performing functions on them. 
+NOTE: The upper and lower functions only work on ASDII characters. Any characters initially formatted in unicode are left unchanged...
+*/
+ 
+ SELECT
+	FirstName as [First Name Unmodified], 
+	UPPER(FirstName) AS [First Name in UPPERCASE],
+	LOWER(FirstName) AS [First Name in lowercase],
+	UPPER(FirstName) || ' ' || UPPER(LastName) AS [Full Name in UPPERCASE]
+ FROM
+	customers;
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 28 July 2022
+DESCRIPTION: Objective: Use the SUBSTR ( ) function together with the UPPER case functions and create a list of customers with the last name listed first in capitol letters and only the first initial of the first name.
+*/
+	
+SELECT
+	UPPER(LastName) AS [Last Name],               /*Here I used the UPPER case function on the LastName and gave it an alias of Last Name.  */
+	SUBSTR(FirstName, 1,1) AS [First Initial]    /* Here I used the SUBSTR function on the (FirstName, 1,1) and gave it an alias of First Initial   */
+FROM
+	customers;
+
+/* Ch. # 7
+CREATED BY: Louis Castille 
+CREATED ON: 29 July 2022
+DESCRIPTION: This query uses STRFTIME to show how the Date functions help to manipulate the many different formats of Date and Time.
+*/
+SELECT
+	STRFTIME('The Year is: %Y The Day is: %d The Month is %m', '2011-05-22') AS [Text with Conversion Specifications];
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: EXAMPLE: Let's use STRFTIME ( ) to calculate employee ages. The first thing to do is to specify the format we desire returned to us. Since BirthDate is a DATETIME data type and the timecodes are blank in our database, we have no interest in the 
+timecodes so we will omit them for the sake of clarity. Since we want to figure out the age of our employees, we want to calculate the difference in time between a given employee's birthdate and the present date.
+The present date is provided by the NOW function
+*/
+
+SELECT
+	LastName,
+	FirstName,
+	STRFTIME('%Y-%m-%d', BirthDate) AS [Birthday No Timecode],
+	STRFTIME('%Y-%m-%d','now') - STRFTIME('%Y-%m-%d', BirthDate) AS [Age]
+FROM
+	employees
+ORDER BY 
+	Age;
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: This query is based on (ON YOUR OWN) PROJECT: 
+1.) sTune celebrates employee birthdays on the first of the month. Create a table for HR that shows employee names, birthdays, and the Celebration day.
+2.) sTunes Human Resources has told us that employee age is a sensitive topic. Rewrite this exercise by listing employee by number of years with the company.
+3.) Which employee has been with the company the longest?
+*/
+	
+SELECT 
+	*
+FROM
+	human_resources
+ORDER BY
+	CelebrationDay DESC;
+
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: The following query's are examples of  the five basic aggregate functions in SQLite. SUM ( ), AVG ( ), MIN ( ), MAX ( ), COUNT ( ).
+*/
+
+SELECT
+	SUM(Total) AS [Total Sales]
+FROM
+	invoices;
+	
+	
+SELECT
+	SUM(Total) AS [TotalSales],
+	AVG(Total) AS [AverageSales],      /*  What is the average invoice amount ?  */
+	MAX(Total) AS [MaximumSale],   /* What is the amount of the largest invoice in our table ?   */
+	MIN(Total) AS [MinSale],
+	Count(*) AS [SalesCount]        /* How many invoices are in our invoices table ? */
+FROM
+	invoices;
+
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: Nesting Functions with the ROUND ( ) Function: Example to add to the query above..
+*/
+
+SELECT
+	AVG(Total) AS [Average Sales],
+	ROUND(AVG(Total), 2) AS [Rounded Average Sales]    /* The Round is a Nested Function used inside the AVG(Total) and the 2 represents the amount of decimals we want the function to round to...    */
+FROM
+	invoices;
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: Here the sTunes Company asks us to calculate the average invoice amount by billing city.
+*/
+
+SELECT
+	BillingCity,
+	ROUND(AVG(Total), 2) AS [Average Invoice Amount]     /* I added the ROUND Function to clean up the query to 2 decimal places...  */
+FROM
+	invoices
+GROUP BY
+	BillingCity
+ORDER BY 
+	 BillingCity;
+	 
+	 
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: Using the WHERE and HAVING Clauses with Grouped Queries... Using the WHERE Clause allows us to add new criteria. In the example below, criteria are added for the non-aggregate field BillingCity.
+*/
+
+SELECT             /* The WHERE Clause will not work with fields that have been aggregated, this is where you would use the HAVING Clause to ask questions about aggregate fields... */
+	BillingCity,
+	AVG(Total)
+FROM	
+	invoices
+WHERE                               /* The following order: WHERE, GROUP BY, Having, and ORDER BY or else errors . */
+	BillingCity LIKE 'L%'
+GROUP BY
+	BillingCity
+ORDER BY 
+	BillingCity;
+	  
+	  
+SELECT
+	BillingCity,
+	AVG(Total)
+FROM
+	Invoices
+WHERE                              /* WHERE is for filtering non-aggregate data..  */
+	BillingCity LIKE 'B%'
+GROUP BY
+	BillingCity
+HAVING                     /* Note: In order to use HAVING Clause, you must have a GROUP BY Clause first...HAVING is for filtering results containing aggregates..    */
+	AVG(Total) > 5
+ORDER BY
+BillingCity;
+
+
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DECRIPTION: Using GROUP BY  with Mutiple Fields
+*/
+
+SELECT
+	BillingCountry,
+	BillingCity,
+	AVG(Total)
+FROM
+	invoices
+GROUP BY
+	BillingCountry, BillingCity
+ORDER BY
+	BillingCountry;
+	
+/* Ch. # 7
+CREATED BY: Louis Castille
+CREATED ON: 29 July 2022
+DESCRIPTION: DATA ANALYSIS CHECKPOINT:
+1.) Create a single-line mailing list for all US customers, including captilized fullnames and full addresses with five digit zip codes, in the following format:
+FRANK HARRIS 1600 Amphitheatre Parkway, Mountain View, CA 94043.
+*/
+
+SELECT 
+	UPPER(FirstName) || ' ' || UPPER(LastName) || ' ' || Address || ',  ' || City || ',  ' || State || ' ' || SUBSTR(PostalCode, 1, 5) AS [Mailing List]
+FROM
+	customers
+WHERE
+	Country = 'USA';
+	
+/* Ch. # 7
+2.) What are the average sales generated by customers from the USA from all years of data available?
+*/
+
+SELECT 
+	ROUND(AVG(Total), 2) AS [average annual sales],
+	BillingCountry
+FROM
+	invoices
+WHERE
+	BillingCountry = 'USA';
+	
+/* Ch. # 7
+3.) What are the company's all-time total sales?
+*/
+
+SELECT
+	SUM(Total)
+FROM
+	invoices;
+	
+/* Ch. # 7
+4.) Who are the top ten best customers from a revenue standpoint?
+*/
+
+SELECT
+	SUM(Total) AS [Revenue Total],
+	c.FirstName,
+	c.LastName
+FROM
+	invoices  i
+INNER JOIN
+	customers  c
+ON
+	i.CustomerId = c.CustomerId
+GROUP BY
+	c.CustomerId
+ORDER BY
+	SUM(Total) DESC
+LIMIT 10;
+	
+/*Ch. # 8 Starts Here:
+CREATED BY: Louis Castille
+CREATED ON: 30 July 2022
+Description: This query returns the Average Total from the invoices table.
+*/;
+
+CREATE VIEW V_AvgTotal_Rounded AS    /* I used a CREATE VIEW here which can be found in the Database Structure Tab (under Views), named (V_AvgTotal_Rounded). I used it in the following 2nd Query, as a INNER Query.  */
+SELECT 
+	ROUND(AVG(Total), 2) AS [Average Total]
+FROM
+	invoices;         /*This will be our INNER Query used below. When we run this query we get a value for Average Total of 5.65 */
+	
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 30 July 2022
+DESCRIPTION: This query uses an OUTER QUERY (UPPERCASE LETTERS) and an INNER QUERY / SubQuery (lowercase letters) after the WHERE Clause wrapped in parenthesis ( ).
+Note: The question for this query is as follows. sTunes wants to gather data about all invoices lower than the average total from the query above. Average Total was 5.65
+*/
+	
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	Total <
+(select               /* Inner Query starts here  */
+	avg(Total)
+from
+	Invoices)    /* Inner Query ends here   */
+ORDER BY
+	Total DESC;
+	
+SELECT  
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM 
+	invoices
+WHERE          
+	Total <     
+	(select         /* This is the same QUERY as the one above, the only difference is that I used a VIEW which I created, you can see it in the Database Structure Tab. LOOK IN VIEWS FOLDER (V_AvgTotal_Rounded) */
+		*
+	from 
+		V_AvgTotal_Rounded)
+ORDER BY
+	Total DESC;
+	
+	
+	
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 30 July 2022
+DESRIPTION: In this Query. We were asked by our sTunes company how each individual city was performing against global average sales... 
+Note: We used a Sub-Query/Inner-Query inside the Select Statement. You can see from this output that the numerical value for Global Average remains the same in each record returned, making it easy for us to compare the average invoice totals by city 
+against the global average.
+*/
+	
+SELECT
+	BillingCity,
+	ROUND(AVG(Total), 2) AS [City Average],
+	(select                                          /* Inner Query starts here */
+		round(avg(total), 2) 
+	from
+		invoices) AS [Global Average]   /* Inner Query ends here */
+FROM
+		invoices
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity;
+	
+SELECT                   /* This Query is the same one as above, the only difference is that I took out the ROUND FUNCTION, and I used a VIEW named (V_TotalAvg) for my INNER Query. Its an INNER/SUB Query built and stored in the View folder in the Database Structure Tab*/
+	BillingCity,
+	AVG(Total) AS [City Average],
+	(select                                                /*The VIEW INNER Query starts here in lower case letters wrapped in parenthesis ( )  */
+		*
+	from 
+		V_TotalAvg) AS [Global Average]
+FROM 
+	invoices 
+GROUP BY
+	BillingCity
+ORDER BY 
+	BillingCity;
+
+	
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 30 July 2022
+DESCRIPTION: Using a WHERE Clause in a Subquery. The Outer query can have a WHERE Clause which, in turn, contains a subquery with its own WHERE Clause. A good example of when we would want a WHERE Clause in a subquery is when we want to compare all 
+fields to  a specific instance. Let's say we were asked to find the all-time largest sale from our dataset from (2009-2012) and to see if there are any invoice totals in the year of records from (2013) that are higher than that value. To answer this question, we would 
+have to get the largest sale prior to (2013). We can do that with the Max ( ) fucntion.
+*/	
+
+SELECT 
+	MAX(Total)
+FROM 
+	invoices
+WHERE
+	InvoiceDate < '2013-01-01';
+/*Now that we know this value 23.86, we wrap this query in parathesis ( ) and then write our outer query and include the additional fields that we need,*/
+
+SELECT
+	InvoiceDate,
+	BillingCity,
+	Total
+FROM
+	Invoices
+WHERE
+	InvoiceDate >= '2013-01-01' AND Total >
+	(select 
+		max(Total)
+	from 
+		invoices
+	where 
+		InvoiceDate < '2013-01-01');
+		
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 31 July 2022
+DESCRIPTION: This Query is an ON YOUR OWN from page 150. (Question): How many invoices were recorded on or before January 1, 2010, that were above the average invoice amount ? 
+The first thing that needs to be done is to find out the Average Total from invoices on or before January 1, 2010. This is going to be a 2 part query.
+NOTE: The 1st query returns an Average Total of 5.42. The 2nd query returns 36 invoices above average in the date range of on/or before January 1, 2010.
+*/
+		
+SELECT                                                                            /* This is going to be the INNER QUERY for the Query below. */
+	ROUND(AVG(Total), 2) AS [Average Total]
+FROM	
+	Invoices
+WHERE
+	InvoiceDate <= '2010-01-01';    /* This Query's results returns 5.42 for the average amount. So now we have a value to compare the next query to. */
+	
+SELECT                                          /* This is the OUTER QUERY*/
+	InvoiceDate,
+	BillingCity,                                          /* Now when we run the second part of this query with the Inner query that was built above, we can see that the Total is above the average total and the invoice date is on/or before January 1, 2010.  */ 
+	Total AS [Above Average Total]
+FROM
+	Invoices
+WHERE
+	InvoiceDate <= '2010-01-01' AND Total >
+	(select                                                                /* This is the INNER QUERY from above. Note: format the inner query in lower case letters for identification. */
+		round(avg(Total), 2) 
+	from 
+		invoices
+	where 
+		invoicedate <= '2010-01-01');
+		
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 31 July 2022
+DESCRIPTION: (Subqueries without Aggregate Functions). The following query shows the transaction date for a specific transaction.
+*/
+
+SELECT
+	InvoiceDate           /* This SUBQUERY/INNER QUERY returns the invoice date of (2012-01-09 00:00:00) a value to compare against the outer query below */
+FROM
+	invoices
+WHERE
+	InvoiceId = 251;
+
+	/* If we wanted to see if there were any other invoices that were recieved after the invoice referenced above, we would build a subquery wrapped in a pair of parenthesis ( ) and then build an outer query around it.  */
+
+SELECT                   /* This is the outer query which returns all invoice dates after (2012-01-09 00:00:00) */
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	Invoices
+WHERE
+	InvoiceDate >
+	(select 
+		InvoiceDate
+		from 
+			invoices
+		where 
+			InvoiceId = 251);
+			
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON 31 July 2022
+DESCRIPTION: Returning Multiple Values from a Subquery: (Question #1.) In the first query, the sTunes management is interested in three particular invoices (251, 252, 255). When we run the following query, we get three invoice dates returned to us. 
+(2012-01-09, 2012-01-22, and 2012-01-24).
+(Question #2.) Now we are asked if any other purchases were made on those particular three days? 
+In order to answer question #2 we need to build an Outer query and wrap the inner query in parenthesis ( ) in the WHERE Clause
+*/
+
+SELECT                       /* This will be our Inner Query used in the Outer query below */
+	InvoiceDate           
+FROM 
+	invoices
+WHERE 
+	InvoiceId IN (251, 252, 255);  /* Mutliple values using the IN Clause*/
+	
+SELECT                           /* This is the Outer query used to answer question # 2, we then carry the Inner Query into the WHERE Clause and format in lower case letters for identification of the Inner Query. */
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	invoices 
+WHERE 
+	InvoiceDate IN
+	(select                   /* This is the Inner query from above, formatted in lower case letters */
+		InvoiceDate
+	from                          /* NOTE: The WHERE Clause is InvoiceDate IN and the INNER QUERY  where clause is InvoiceId in.  */
+		invoices 
+	where 
+		InvoiceId in (251, 252, 255));    /* When we run this query, we can see that it returns 2 invoices on the same date.  */
+		
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 31 July 2022
+DESCRIPTION: This query uses the invoice_items table, then we selected the InvoiceId and the TrackId fields to show us which individual sTunes tracks were purchased on each invoice. The results show that certain track numbers were ordered multiple times 
+across different invoices. 
+Our sTunes management is interested in discovering which tracks are not selling. We would need to find a table that links TrackId with InvoiceId. We could use subqueries to list all tracks (by composer and name) that don't appear in the invoice_items table.
+ */
+
+ SELECT          /* When we run this query we get redundant TrackId data, so we will clean it up using the distinct keyword in the query below  */
+	InvoiceId,
+	TrackId 
+FROM 
+	invoice_items
+ORDER BY
+	TrackId;
+	
+	
+SELECT  DISTINCT                      /* This is the contiued query from above using the DISTINCT Keyword, which will be used as the Inner query below. */ 
+	TrackId
+FROM 
+	invoice_items
+ORDER BY
+	TrackId;                 /* When we run this query we can see there is no redundance's in the TrackId field. */
+	
+SELECT               /* This is the Outer query using the WHERE Clause and also the NOT IN Clause */
+	TrackId,
+	Composer,
+	Name
+FROM 
+	tracks
+WHERE 
+	TrackId NOT IN 
+	(select                         /* This is the INNER Query from above using the DISTINCT Keyword. The Inner query is in lower case letters for identification.   */
+		distinct TrackId
+	from 
+	invoice_items);   /* When we run this query it returns all the songs that did not sell. Now sTunes sales has a clear picture of what songs have not been purchased */
+
+/* Ch. # 8
+CREATED BY: Louis Castille
+CREATED ON: 01 August 2022
+DESCRIPTION:  (Data Analysis Checkpoint: Question # 1.) How many invoices exceed the average invoice amount generated in 2010 ?
+*/	
+SELECT                 /* Build the Inner query, Avg the total, and in the Where Clause select the date range*/
+	AVG(Total)
+FROM
+	invoices
+WHERE
+	InvoiceDate BETWEEN '2010-01-01' AND  '2010-12-31';   /* When you run the query you get the average total, now you have a value of 5.80 to compare. Then, carry the inner query to the Outer query below into the Where Clause */
+	
+SELECT             /* This is the Outer query */
+	InvoiceDate,
+	Total	
+FROM 
+	invoices
+WHERE
+	 Total > 
+	(select             /* This is the inner query from above */
+		avg(total)
+	from 
+		invoices 
+	where 
+		InvoiceDate between '2010-01-01' and '2010-12-31')
+ORDER BY
+	Total DESC;
+
+/* CH.# 8 - Data Analysis Checkpoint: Question # 2.)  Who are the customers responsible for these invoices ?  ( In order to answer this question, I used an INNER JOIN to connect to invoices table to the customers table ON the CustomerID. Then, added the c.FirstName, c.LastName  */	
+SELECT 
+	c.FirstName,
+	c.LastName,
+	c.Country,
+	i.InvoiceDate,
+	i.Total 
+FROM
+	invoices i
+INNER JOIN
+	customers c
+ON
+	i.CustomerId = c.CustomerId
+WHERE 
+	Country = 'USA' AND Total > 
+	(select 
+		avg(total)                 /* CH. # 8 - Data Analysis Checkpoint: Question # 3. )  How many of these customers are from the USA?  ( In order to answer this question I added c.Country in the SELECT Statement in the query above and also added Country = 'USA' the WHERE Clause.*/	
+	from 
+		invoices
+	where 
+		InvoiceDate between '2010-01-01' and '2010-12-31')
+ORDER BY 
+	Total DESC;
+	
+
+/*  Chapter # 9 Starts Here:
+CREATED BY: Louis Castille
+CREATED ON: 02 August 2022
+DESCRIPTION: In This Query I Created a VIEW and named it (V_TotalAvg). When we run it for the first time it stores itself into the Database Structure Tab in a file call Views. Note: if you try to run it again it will constantly give you errors, because it is stored and can only be 
+called to be used in Sub-query's. I have used in a couple of query's above in chapter # 8.
+*/		
+
+CREATE VIEW V_TotalAvg AS
+SELECT 
+	AVG(Total) AS [Total Average] 
+FROM 
+	invoices;
+
+/* Ch. # 9
+CREATED BY: Louis Castille
+CREATED ON: 2 August 2022
+DESCRIPTION: This Query is an INNER JOIN from the 2 tables (invoice_items and tracks). I then Created a VIEW for this INNER JOIN and named it (V_Tracks_InvoiceItems), it is now stored in the View folder in the Database Structure Tab.
+*/
+
+CREATE VIEW V_Tracks_InvoiceItems AS
+SELECT 
+	ii.InvoiceId,
+	ii.UnitPrice,
+	ii.Quantity,
+	t.Name,
+	t.Composer,
+	t.Milliseconds 
+FROM 
+	invoice_items ii
+INNER JOIN 
+	tracks t
+ON
+	ii.TrackId = t.TrackId;
+	
+/* Ch. # 9
+CREATED BY: Louis Castille
+CREATED ON: 2 August
+DESCRIPTION: This Query is an INNER JOIN from 3 tables (invoices, customers, and employees). I then Created a VIEW for this INNER JOIN and named it (V_inv_cus_emp), it is now stored in the View folder in the Database Structure Tab.
+*/
+CREATE VIEW V_inv_cus_emp AS
+SELECT 
+	i.InvoiceId,
+	i.InvoiceDate,
+	i.Total,
+	i.CustomerId,
+	c.FirstName,
+	c.LastName,
+	c.SupportRepId,
+	e.EmployeeId,
+	e.LastName,
+	e.FirstName,
+	e.Title 
+FROM 
+	invoices AS i
+INNER JOIN
+	customers AS c
+ON
+	i.CustomerId = c.CustomerId 
+INNER JOIN 
+	employees AS e
+ON 
+	e.EmployeeID = c.SupportRepId
+ORDER BY
+	invoiceDate;
+
+/* Ch. # 9
+CREATED BY: Louis Castille
+CREATED ON: 3 August 2022
+DESCRIPTION: This Query is an INNER JOIN from 2 Views (V_Tracks_InvoiceItems and V_inv_cus_emp). I have a total of 5 tables in this INNER JOIN Query, with only a few lines of code. This can be kinda tricky when Inner Joining them, notice the 
+(FROM V_Tracks_InvoiceItems tii), the (tii) is used for the tables it represents and the (INNER JOIN V_inv_cus_emp ice), the ice is used for the tables it represents, then you can see the ON Statement how the link occurs. tii.InvoiceId = ice.InvoiceId.
+With the query below joining five tables together, we can now know what tracks were sold by each employee and which customer they were sold to. By aggregating the data, we can also determine which track was sold the most, how much total revenue was generated 
+by the track, and the employee responsible for each sale. We can now go even further and save our aggregation as a VIEW if we want to.
+Note: JOINS between multiple views will only work if the key fields held in common from all of these tables were included in the intial join.
+*/
+	
+SELECT 
+	*
+FROM 
+	V_Tracks_InvoiceItems tii
+INNER JOIN
+	V_inv_cus_emp ice
+ON
+	tii.InvoiceId = ice.InvoiceId; 
+
+/*Ch. # 9
+CREATED BY: Louis Castille
+CREATED ON: 3 August 2022
+DECRIPTION: Removing  a View Using the DROP Statement: Although we have shown you that you can remove a view by right clicking on the view in the Database Structure tab, a view can also be removed by using a statement called the DROP clause. To use this command, 
+we type the following: (DROP VIEW V_AvgTotal). This Statement will delete the V_AvgTotal view. Only the view is removed from the database, no data is affected by using the DROP VIEW syntax.
+Note: If you remove a view that is referenced by other views, those views will not function anymore...
+  */
+
+/*Ch. # 9  (Data Analysis Checkpoint)
+CREATED BY: Louis Castille
+CREATED ON: 3 August 2022
+DESCRIPTION: For this checkpoint, we will be using a query from chapter 8: Using a Subquery in the SELECT Statement. We have reproduced it here:
+1.) Take the inner query (by itself) from this SELECT statement and create a view from it. Save the view as V_GlobalAverage.
+2.) Remove the subquery from the above code entirely and subsitute it for your newly created view V_GlobalAverage.
+3.) Save this new query as a view called V_CityAvgVsGlobalAvg.
+4.) Delete the view V_GlobalAverage. What happens to V_CityAvgVsGlobalAvg ?  (Answer is the View called (V_CityAvgVsGlobalAvg) no longer works, because it was linked with another View called (V_GlobalAverage) which we deleted. In order to make the View called
+      V_CityAvgVsGlobalAvg work again, we would need to recreate the View V_GlobalAverage and save it in the view folder in the Database Struture tab.
+*/  
+
+ CREATE VIEW V_CityAvgVsGlobalAvg AS
+SELECT 
+	BillingCity,
+	AVG(Total) AS [City Average],
+	(select                                                                    /* This subquery is using a View that I created below.  */
+		* 
+	from 
+		V_GlobalAverage) AS [Global Average]
+FROM 
+	invoices 
+GROUP BY 
+	BillingCity 
+ORDER BY
+	BillingCity;
+	
+CREATE VIEW V_GlobalAverage AS	
+SELECT                                                           /* This is the subquery from the query above that was used to create a View named V_GlobalAverage. */
+	AVG(Total)
+FROM 
+	invoices;
+	
+	
+/* This Query uses the combined VIEWS above with just a few lines of code,  it shows the average total as (Global Average) and compares it to each individual City's average.  This is done by the outer Query above using the GROUP BY and the ORDER BY functions.  */
+SELECT          
+	* 
+FROM
+	V_CityAvgVsGlobalAvg;
